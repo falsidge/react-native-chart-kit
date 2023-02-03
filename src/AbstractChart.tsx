@@ -44,7 +44,9 @@ class AbstractChart<
 > extends Component<AbstractChartProps & IProps, AbstractChartState & IState> {
   calcScaler = (data: number[]) => {
     if (this.props.fromZero && this.props.fromNumber) {
-      return Math.max(...data, this.props.fromNumber) - Math.min(...data, 0) || 1;
+      return (
+        Math.max(...data, this.props.fromNumber) - Math.min(...data, 0) || 1
+      );
     } else if (this.props.fromZero) {
       return Math.max(...data, 0) - Math.min(...data, 0) || 1;
     } else if (this.props.fromNumber) {
@@ -469,10 +471,12 @@ class AbstractChart<
     return (
       <Defs>
         <LinearGradient
-          id="backgroundGradient"
+          id={
+            "backgroundGradient" + backgroundGradientFrom + backgroundGradientTo
+          }
           x1={0}
-          y1={height}
-          x2={width}
+          y1={height - 55}
+          x2={0}
           y2={0}
           gradientUnits="userSpaceOnUse"
         >

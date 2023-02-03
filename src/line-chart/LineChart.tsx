@@ -856,7 +856,12 @@ class LineChart extends AbstractChart<LineChartProps, LineChartState> {
             height={height + legendOffset}
             rx={borderRadius}
             ry={borderRadius}
-            fill="url(#backgroundGradient)"
+            fill={
+              "url(#backgroundGradient" +
+              chartConfig.backgroundGradientFrom +
+              chartConfig.backgroundGradientTo +
+              ")"
+            }
             fillOpacity={transparent ? 0 : 1}
           />
           {this.props.data.legend &&
@@ -981,13 +986,15 @@ class LineChart extends AbstractChart<LineChartProps, LineChartState> {
             contentContainerStyle={{ width: width * 2 }}
             showsHorizontalScrollIndicator={false}
             scrollEventThrottle={16}
-            onScroll={Animated.event([
-              {
-                nativeEvent: {
-                  contentOffset: { x: scrollableDotHorizontalOffset }
+            onScroll={Animated.event(
+              [
+                {
+                  nativeEvent: {
+                    contentOffset: { x: scrollableDotHorizontalOffset }
+                  }
                 }
-              }
-            ], { useNativeDriver: false }
+              ],
+              { useNativeDriver: false }
             )}
             horizontal
             bounces={false}
